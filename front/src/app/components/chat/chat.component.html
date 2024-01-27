@@ -1,0 +1,49 @@
+
+<div>   
+    <div *ngIf="!isLogged" class="username-page">
+        <div class="username-page-container">
+            <p *ngIf="error" color="red">Échec de la connexion.</p>
+
+            <h1 class="title">Écrivez votre nom pour accéder au tchat</h1>
+
+            <form class="usernameForm" [formGroup]="usernameForm" name="usernameForm" (ngSubmit)="connect()">
+
+                <div class="form-group">
+                    <input type="text" class="name form-control" placeholder="Nom d'utilisateur" autocomplete="off" formControlName="sender"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="accent username-submit" [disabled]="usernameForm.invalid">Démarrer le tchat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div *ngIf="isLogged" class="chat-page">
+        <div class="chat-container">
+            
+            <div class="chat-header">
+                <h2>Tchat support</h2>
+            </div>
+        
+            <div *ngFor="let string of greetings" class="messageArea"> 
+                <div class="container">
+                    <p>{{string}}</p>
+                </div>
+            </div>
+            
+            <form class="messageForm" [formGroup]="messageForm" name="messageForm" (ngSubmit)="sendMessage()">
+                
+                <div class="form-group">
+                    <div class="input-group clearfix">
+
+                        <input type="text" class="message form-control" autocomplete="off" placeholder="Écrivez votre Message..." name="newmessage" [(ngModel)]="newmessage" formControlName="content"/>  
+                        
+                        <button type="submit" class="primary" [disabled]="messageForm.invalid">Envoyer</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
